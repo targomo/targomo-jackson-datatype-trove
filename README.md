@@ -19,7 +19,8 @@ To include add to maven:
 To include to your Jackson Object Mapper execute:
 ```
 ObjectMapper om = new ObjectMapper();
-om.registerModule(new TroveModule(-1)); //-1 is the "null" value representative
+om.registerModule(new JodaModule()) 
+        .registerModule(new TroveModule(-1)); //-1 is the "null" value representative 
 ```
 
 ## Change Log:
