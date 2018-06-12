@@ -5,7 +5,7 @@
     <groupId>com.targomo</groupId>
     <artifactId>jackson-datatype-trove</artifactId>
     <name>${project.artifactId}</name>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <!--<packaging>jar</packaging>-->
     <description>Add-on datatype-support module for Jackson (http://jackson.codehaus.org)
         that handles Trove (http://trove.starlight-systems.com/) types
