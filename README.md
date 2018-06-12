@@ -23,7 +23,7 @@ om.registerModule(new JodaModule())
         .registerModule(new TroveModule(-1)); //-1 is the "null" value representative
 ```
 
-##Change Log:
+## Change Log:
 
-###Version 0.0.2
+### Version 0.0.2
 * initial import from private repo
