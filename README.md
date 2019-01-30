@@ -1,6 +1,7 @@
-# jackson-datatype-trove
+# targomo-jackson-datatype-trove
 This module facilitates serialization and deserialization of certain Trove objects. So far it supports:
 * TIntIntMap
+* TIntFloatMap
 * TIntObjectMap
 * TObjectIntMap
 
@@ -13,7 +14,7 @@ To include add to maven:
 <dependency>
     <groupId>com.targomo</groupId>
     <artifactId>jackson-datatype-trove</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.4</version>
 </dependency>
 ```
 To include to your Jackson Object Mapper execute:
@@ -26,7 +27,7 @@ om.registerModule(new JodaModule())
 ## Change Log:
 
 ### Version 0.0.4
-* to fill
+* added deserialization/serialization implementations for TIntFloatMap
 
 ### Version 0.0.3
 * initial import from private repo
