@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ser.Serializers;
 import com.fasterxml.jackson.databind.type.CollectionLikeType;
 import com.fasterxml.jackson.databind.type.MapLikeType;
 
+import gnu.trove.map.TIntFloatMap;
 import gnu.trove.map.TIntIntMap;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.TObjectIntMap;
@@ -33,6 +34,12 @@ public final class TroveSerializers extends Serializers.Base {
         // int-int types:
         if (TIntIntMap.class.isAssignableFrom(type.getRawClass())) {
             return new TIntIntMapSerializer(type, null,
+                    keySerializer, elementTypeSerializer, elementValueSerializer);
+        }
+
+        // int-float types:
+        if (TIntFloatMap.class.isAssignableFrom(type.getRawClass())) {
+            return new TIntFloatMapSerializer(type, null,
                     keySerializer, elementTypeSerializer, elementValueSerializer);
         }
 
