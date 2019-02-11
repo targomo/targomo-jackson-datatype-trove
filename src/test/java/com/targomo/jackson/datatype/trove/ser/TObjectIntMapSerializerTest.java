@@ -60,7 +60,7 @@ public final class TObjectIntMapSerializerTest extends BaseTroveSerializerTest {
 
         TObjectIntHashMap<DateTime> map = getDateTimeKeyMap();
 
-        System.out.println( EXPECTED_DATETIME_KEY_MAP );
+//        System.out.println( EXPECTED_DATETIME_KEY_MAP );
 
         assertEquals(EXPECTED_DATETIME_KEY_MAP, getString(writer, map));
 
