@@ -10,11 +10,16 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 public abstract class BaseTroveSerializerTest {
+
     ObjectWriter writer;
+
+    final int NO_ENTRY_VALUE_TESTS = Integer.MAX_VALUE;
 
     @Before
     public void setUp() {
-        writer = new ObjectMapper().registerModule(new TroveModule(Integer.MAX_VALUE)).registerModule(new JodaModule()).writer();
+        writer = new ObjectMapper()
+                .registerModule(new TroveModule(NO_ENTRY_VALUE_TESTS))
+                .registerModule(new JodaModule()).writer();
     }
 
     String getString(ObjectWriter w, Object o) throws IOException {

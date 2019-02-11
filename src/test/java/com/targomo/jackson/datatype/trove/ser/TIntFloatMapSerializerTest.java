@@ -16,8 +16,15 @@ public class TIntFloatMapSerializerTest extends BaseTroveSerializerTest {
         TIntFloatMap map = new TIntFloatHashMap();
         map.put(16, 1.5f);
 
-        System.out.println(getString(writer, map));
+//        System.out.println(getString(writer, map));
 
         assertEquals("{\"16\":1.5}", getString(writer, map));
+    }
+
+    @Test
+    public void testEmptyMap() throws IOException
+    {
+        TIntFloatMap map = new TIntFloatHashMap();
+        assertEquals("{}", getString(writer, map));
     }
 }

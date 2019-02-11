@@ -26,7 +26,7 @@ public class TIntObjectMapSerializerTest extends BaseTroveSerializerTest {
         TIntObjectMap<double[][]> map = new TIntObjectHashMap<>();
         map.put(13, new double[][]{{1.0,2.0,4.0},{3.0,6.0,7.0}});
 
-        System.out.println( getString(writer, map) );
+//        System.out.println( getString(writer, map) );
 
         assertEquals("{\"13\":[[1.0,2.0,4.0],[3.0,6.0,7.0]]}", getString(writer, map));
     }

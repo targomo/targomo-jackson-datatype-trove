@@ -16,7 +16,7 @@ public class TIntIntMapSerializerTest extends BaseTroveSerializerTest {
         TIntIntMap map = new TIntIntHashMap();
         map.put(13, 1);
 
-        System.out.println(getString(writer, map));
+//        System.out.println(getString(writer, map));
 
         assertEquals("{\"13\":1}", getString(writer, map));
     }
