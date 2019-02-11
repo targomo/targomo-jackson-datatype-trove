@@ -18,8 +18,6 @@ stages:
 
 analyse_feature:
    stage: analyse
-   tags:
-     - kubernetes
    script:
      - mvn --settings .ci/settings.xml --batch-mode -DskipTests verify sonar:sonar
        -Dsonar.host.url=$SONARQUBE_URL
@@ -54,8 +52,6 @@ analyse_feature:
 
 sonarqube:
    stage: test
-   tags:
-       - kubernetes
    script:
        - mvn --settings .ci/settings.xml --batch-mode verify sonar:sonar
            -Dsonar.host.url=$SONARQUBE_URL
