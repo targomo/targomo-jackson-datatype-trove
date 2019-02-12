@@ -2,6 +2,7 @@ package com.targomo.jackson.datatype.trove.deser;
 
 import java.util.HashSet;
 
+import gnu.trove.map.TIntFloatMap;
 import gnu.trove.map.TIntIntMap;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.TObjectIntMap;
@@ -43,6 +44,12 @@ public class TroveDeserializers extends Deserializers.Base{
         // int-int types:
         if (TIntIntMap.class.isAssignableFrom(type.getRawClass())) {
             return new TIntIntMapDeserializer(type, null, keyDeserializer,
+                    elementTypeDeserializer, elementDeserializer,
+                    _findIgnorable(config, beanDesc), this.noEntryValue);
+        }
+        // int-float types:
+        if (TIntFloatMap.class.isAssignableFrom(type.getRawClass())) {
+            return new TIntFloatMapDeserializer(type, null, keyDeserializer,
                     elementTypeDeserializer, elementDeserializer,
                     _findIgnorable(config, beanDesc), this.noEntryValue);
         }

@@ -26,6 +26,7 @@ class TroveTypeModifier extends TypeModifier {
         valTypes.put(TObjectByteMap.class, byte.class);
         valTypes.put(TObjectCharMap.class, char.class);
         valTypes.put(TIntIntMap.class, int.class);
+        valTypes.put(TIntFloatMap.class, float.class);
     }
     private final static Map<Class<?>, Class<?>> keyTypes = new HashMap<>();
     static {
@@ -37,6 +38,7 @@ class TroveTypeModifier extends TypeModifier {
         keyTypes.put(TByteObjectMap.class, byte.class);
         keyTypes.put(TCharObjectMap.class, char.class);
         keyTypes.put(TIntIntMap.class, int.class);
+        keyTypes.put(TIntFloatMap.class, int.class);
     }
 
     TroveTypeModifier() {
