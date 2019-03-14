@@ -20,6 +20,6 @@ public class TObjectIntMapDeserializerTest extends BaseTroveDeserializerTest
                         .readValue("{\"abc\" : 3, \"foo\" : -7}");
         assertEquals(2, map.size());
         assertEquals(Integer.valueOf(-7), Integer.valueOf(map.get("foo")));
-        assertEquals(NO_ENTRY_VALUE_TESTS, map.get("wot"));
+        assertEquals(NO_ENTRY_VALUE_INT_TESTS, map.get("wot"));
     }
 }

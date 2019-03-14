@@ -22,7 +22,7 @@ public class TIntIntMapDeserializerTest extends BaseTroveDeserializerTest
                 .readValue("{\"8\" : 1, \"1\" : 2}");
         assertEquals(2, map.size());
         assertEquals(1, map.get(8));
-        assertEquals(NO_ENTRY_VALUE_TESTS, map.get(3));
+        assertEquals(NO_ENTRY_VALUE_INT_TESTS, map.get(3));
     }
 
 
@@ -35,7 +35,7 @@ public class TIntIntMapDeserializerTest extends BaseTroveDeserializerTest
         map.put(17, 3);
 
         ObjectMapper om = new ObjectMapper();
-        om.registerModule(new TroveModule(NO_ENTRY_VALUE_TESTS))
+        om.registerModule(new TroveModule(NO_ENTRY_VALUE_INT_TESTS, NO_ENTRY_VALUE_FLOAT_TESTS))
                 .registerModule(new JodaModule());
 //        System.out.println( om.writerWithDefaultPrettyPrinter().writeValueAsString(map) );
 

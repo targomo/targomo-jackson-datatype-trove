@@ -13,12 +13,13 @@ public abstract class BaseTroveSerializerTest {
 
     ObjectWriter writer;
 
-    final int NO_ENTRY_VALUE_TESTS = Integer.MAX_VALUE;
+    final int NO_ENTRY_VALUE_INT_TESTS = Integer.MAX_VALUE;
+    final float NO_ENTRY_VALUE_FLOAT_TESTS = Float.MAX_VALUE;
 
     @Before
     public void setUp() {
         writer = new ObjectMapper()
-                .registerModule(new TroveModule(NO_ENTRY_VALUE_TESTS))
+                .registerModule(new TroveModule(NO_ENTRY_VALUE_INT_TESTS,NO_ENTRY_VALUE_FLOAT_TESTS))
                 .registerModule(new JodaModule()).writer();
     }
 

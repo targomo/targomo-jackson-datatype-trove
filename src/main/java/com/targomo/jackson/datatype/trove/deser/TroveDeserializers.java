@@ -16,10 +16,12 @@ import com.fasterxml.jackson.databind.util.ArrayBuilders;
 
 public class TroveDeserializers extends Deserializers.Base{
 
-    private final int noEntryValue;
+    private final int noEntryValueInt;
+    private final float noEntryValueFloat;
 
-    public TroveDeserializers(int noEntryValue){
-        this.noEntryValue = noEntryValue;
+    public TroveDeserializers(int noEntryValueInt, float noEntryValueFloat){
+        this.noEntryValueInt = noEntryValueInt;
+        this.noEntryValueFloat = noEntryValueFloat;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class TroveDeserializers extends Deserializers.Base{
         if (TObjectIntMap.class.isAssignableFrom(type.getRawClass())) {
             return new TObjectIntMapDeserializer(type, null, keyDeserializer,
                     elementTypeDeserializer, elementDeserializer,
-                    _findIgnorable(config, beanDesc), this.noEntryValue);
+                    _findIgnorable(config, beanDesc), this.noEntryValueInt);
         }
         // Object-value types:
         if (TIntObjectMap.class.isAssignableFrom(type.getRawClass())) {
@@ -45,13 +47,13 @@ public class TroveDeserializers extends Deserializers.Base{
         if (TIntIntMap.class.isAssignableFrom(type.getRawClass())) {
             return new TIntIntMapDeserializer(type, null, keyDeserializer,
                     elementTypeDeserializer, elementDeserializer,
-                    _findIgnorable(config, beanDesc), this.noEntryValue);
+                    _findIgnorable(config, beanDesc), this.noEntryValueInt);
         }
         // int-float types:
         if (TIntFloatMap.class.isAssignableFrom(type.getRawClass())) {
             return new TIntFloatMapDeserializer(type, null, keyDeserializer,
                     elementTypeDeserializer, elementDeserializer,
-                    _findIgnorable(config, beanDesc), this.noEntryValue);
+                    _findIgnorable(config, beanDesc), this.noEntryValueFloat);
         }
         return null;
     }
