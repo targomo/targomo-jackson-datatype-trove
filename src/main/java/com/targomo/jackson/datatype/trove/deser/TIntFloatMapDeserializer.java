@@ -15,12 +15,12 @@ public class TIntFloatMapDeserializer extends BaseTroveMapDeserializer<TIntFloat
 {
     private static final long serialVersionUID = 1L;
     private final boolean standardValueDeserializer;
-    private final int noEntryValue;
+    private final float noEntryValue;
 
     public TIntFloatMapDeserializer(JavaType type, BeanProperty property,
                                     KeyDeserializer keyDeserializer, TypeDeserializer valueTypeDeserializer,
                                     JsonDeserializer<?> valueDeserializer,
-                                    Set<String> toIgnore, int noEntryValue)
+                                    Set<String> toIgnore, float noEntryValue)
     {
         super(type, property, keyDeserializer, valueTypeDeserializer, valueDeserializer, toIgnore);
         this.standardValueDeserializer = isDefaultDeserializer(valueDeserializer);
