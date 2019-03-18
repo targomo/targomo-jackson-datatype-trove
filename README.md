@@ -14,17 +14,22 @@ To include add to maven:
 <dependency>
     <groupId>com.targomo</groupId>
     <artifactId>jackson-datatype-trove</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 </dependency>
 ```
 To include to your Jackson Object Mapper execute:
 ```
 ObjectMapper om = new ObjectMapper();
+//-1 is the "null" value representative for integer values
+//-1.0f is the "null" value representative for float values
 om.registerModule(new JodaModule()) 
-        .registerModule(new TroveModule(-1)); //-1 is the "null" value representative 
+        .registerModule(new TroveModule(-1, -1.0f));  
 ```
 
 ## Change Log:
+
+### Version 0.0.5
+* added no_entry_value for float types
 
 ### Version 0.0.4
 * added deserialization/serialization implementations for TIntFloatMap
