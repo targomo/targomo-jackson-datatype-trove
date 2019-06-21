@@ -1,4 +1,4 @@
-image: code.route360.net:4567/docker/general-image/service/psql9.6:latest
+image: code.route360.net:4567/targomo/external/tomcat:8.5.40-jdk8-expose
 
 cache:
   key: "mvn"
