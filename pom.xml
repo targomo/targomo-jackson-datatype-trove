@@ -5,7 +5,7 @@
     <groupId>com.targomo</groupId>
     <artifactId>jackson-datatype-trove</artifactId>
     <name>${project.artifactId}</name>
-    <version>0.0.6</version>
+    <version>0.0.6.1-SNAPSHOT</version>
     <!--<packaging>jar</packaging>-->
     <description>Add-on datatype-support module for Jackson (http://jackson.codehaus.org)
         that handles Trove (http://trove.starlight-systems.com/) types
@@ -177,15 +177,15 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>targomo-nexus-snapshots</id>
+            <url>https://repository.route360.net/repository/maven-snapshots/</url>
         </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>targomo-nexus-releases</id>
+            <url>https://repository.route360.net/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
-
+    
     <profiles>
         <profile>
             <!-- Use "mvn deploy -DperformRelease=true ..." for deploying to maven central -->
