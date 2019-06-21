@@ -25,7 +25,7 @@ public class TIntFloatMapDeserializerTest extends BaseTroveDeserializerTest
         assertEquals(2, map.size());
         assertThat(map.get(8)).isEqualTo(1.0f);
         assertThat(map.get(1)).isEqualTo(2.5f);
-        assertThat(map.get(3)).isEqualTo(NO_ENTRY_VALUE_TESTS);
+        assertThat(map.get(3)).isEqualTo(NO_ENTRY_VALUE_FLOAT_TESTS);
     }
 
 
@@ -38,7 +38,7 @@ public class TIntFloatMapDeserializerTest extends BaseTroveDeserializerTest
         map.put(17, -3.886757545f);
 
         ObjectMapper om = new ObjectMapper();
-        om.registerModule(new TroveModule(NO_ENTRY_VALUE_TESTS))
+        om.registerModule(new TroveModule(NO_ENTRY_VALUE_INT_TESTS, NO_ENTRY_VALUE_FLOAT_TESTS))
                 .registerModule(new JodaModule());
 //        System.out.println( om.writerWithDefaultPrettyPrinter().writeValueAsString(map) );
 

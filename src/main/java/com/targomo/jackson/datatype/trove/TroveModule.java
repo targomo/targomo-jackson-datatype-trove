@@ -7,11 +7,13 @@ import com.targomo.jackson.datatype.trove.ser.TroveSerializers;
 public final class TroveModule extends SimpleModule {
     private static final long serialVersionUID = 1L;
 
-    private final int noEntryValue;
+    private final int noEntryValueInt;
+    private final float noEntryValueFloat;
 
-    public TroveModule(int noEntryValue) {
+    public TroveModule(int noEntryValueInt, float noEntryValueFloat) {
         super("TroveModule", ModuleVersion.INSTANCE.version());
-        this.noEntryValue = noEntryValue;
+        this.noEntryValueInt = noEntryValueInt;
+        this.noEntryValueFloat = noEntryValueFloat;
     }
 
     @Override
@@ -21,6 +23,6 @@ public final class TroveModule extends SimpleModule {
         context.addTypeModifier(new TroveTypeModifier());
 
         context.addSerializers(new TroveSerializers());
-        context.addDeserializers(new TroveDeserializers(this.noEntryValue));
+        context.addDeserializers(new TroveDeserializers(this.noEntryValueInt,this.noEntryValueFloat));
     }
 }
