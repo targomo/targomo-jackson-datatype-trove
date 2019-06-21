@@ -14,7 +14,7 @@ To include add to maven:
 <dependency>
     <groupId>com.targomo</groupId>
     <artifactId>jackson-datatype-trove</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
 </dependency>
 ```
 To include to your Jackson Object Mapper execute:
