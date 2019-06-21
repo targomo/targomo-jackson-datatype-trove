@@ -1,89 +1,37 @@
-image: code.route360.net:4567/docker/general-image/service/psql9.6:latest
+# Include Global Configurations
+include:
+  - project: 'api-server/gitlab-ci-scripts'
+    ref: v1.0
+    file: '.global-configuration.yml'
 
-cache:
-  key: "mvn"
-  paths:
-    - .m2/
-
-services:
-  - docker:dind
-
-variables:
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2"
+image: code.route360.net:4567/docker/general-image/service/psql9.6:0.0.4
 
 stages:
-  - analyse
+  - build
   - test
   - deploy
 
-analyse_feature:
-   stage: analyse
-   script:
-     - mvn --settings .ci/settings.xml --batch-mode -DskipTests verify sonar:sonar
-       -Dsonar.host.url=$SONARQUBE_URL
-       -Dsonar.login=$SONARQUBE_TOKEN
-       -Dsonar.branch.name=$CI_COMMIT_REF_NAME
-       -Dsonar.branch.target=develop
-       -Dsonar.analysis.mode=preview
-       -Dsonar.gitlab.api_version=v4
-       -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA
-       -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
-       -Dsonar.gitlab.project_id=$CI_PROJECT_ID
-       -Dsonar.gitlab.url=$GITLAB_URL
-       -Dsonar.gitlab.user_token=$GITLAB_TOKEN
-       -Dsonar.gitlab.query_max_retry=100
-       -Dsonar.gitlab.query_wait=10000
-     - mvn --settings .ci/settings.xml --batch-mode verify sonar:sonar
-       -Dsonar.host.url=$SONARQUBE_URL
-       -Dsonar.login=$SONARQUBE_TOKEN
-       -Dsonar.branch.name=$CI_COMMIT_REF_NAME
-       -Dsonar.branch.target=develop
-       -Dsonar.gitlab.api_version=v4
-       -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA
-       -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
-       -Dsonar.gitlab.project_id=$CI_PROJECT_ID
-       -Dsonar.gitlab.url=$GITLAB_URL
-       -Dsonar.gitlab.user_token=$GITLAB_TOKEN
-       -Dsonar.gitlab.query_max_retry=100
-       -Dsonar.gitlab.query_wait=10000
-     - cat target/site/jacoco-ut/index.html
-   only:
-     - /^feature.*$/
+build:
+  stage: build
+  script:
+    - mvn clean compile
+  only:
+    - /^feature.*$/
+    - develop
 
 sonarqube:
-   stage: test
-   script:
-       - mvn --settings .ci/settings.xml --batch-mode verify sonar:sonar
-           -Dsonar.host.url=$SONARQUBE_URL
-           -Dsonar.login=$SONARQUBE_TOKEN
-           -Dsonar.branch.name=develop
-           -Dsonar.branch.target=master
-           -Dsonar.gitlab.api_version=v4
-           -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA
-           -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
-           -Dsonar.gitlab.project_id=$CI_PROJECT_ID
-           -Dsonar.gitlab.url=$GITLAB_URL
-           -Dsonar.gitlab.user_token=$GITLAB_TOKEN
-           -Dsonar.gitlab.query_max_retry=100
-           -Dsonar.gitlab.query_wait=10000
-   only:
-     - develop
-
-deploy_feature:
-  stage: deploy
+  stage: test
   script:
-    - mvn clean deploy -DperformRelease=true
-  when: manual
-  artifacts:
-       name: "${CI_JOB_NAME}_${CI_COMMIT_REF_NAME}"
-       paths:
-         - target/*.jar
-
+    - mvn verify sonar:sonar
+    - cat target/site/jacoco-ut/index.html
+  only:
+    - /^feature.*$/
+    - develop
 
 deploy_maven:
   stage: deploy
   script:
-    - mvn --settings .ci/settings.xml --batch-mode deploy -DperformRelease=true
+    - mvn -DperformRelease=true deploy
   artifacts:
     name: "${CI_JOB_NAME}_${CI_COMMIT_REF_NAME}"
     paths:
@@ -95,7 +43,7 @@ deploy_maven:
 deploy_nexus:
   stage: deploy
   script:
-    - mvn --settings .ci/settings.xml --batch-mode -Dmaven.test.skip=true deploy
+    - mvn -Dmaven.test.skip=true deploy
   artifacts:
     name: "${CI_JOB_NAME}_${CI_COMMIT_REF_NAME}"
     paths:
@@ -106,18 +54,3 @@ deploy_nexus:
     - /^release.*$/
     - develop
 
-.auto_devops: &auto_devops |
-
-  function setup_docker() {
-    if ! docker info &>/dev/null; then
-      if [ -z "$DOCKER_HOST" -a "$KUBERNETES_PORT" ]; then
-        export DOCKER_HOST='tcp://localhost:2375'
-      fi
-    fi
-  }
-
-before_script:
-  - *auto_devops
-  - setup_docker
-  - sed -i 's/SONATYPE_PASSWORD/$SONATYPE_PASSWORD/g' .ci/settings.xml
-  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN code.route360.net:4567
