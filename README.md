@@ -30,6 +30,9 @@ om.registerModule(new JodaModule())
 
 ### Version 0.0.5
 * added no_entry_value for float types
+* Updated jackson to 2.9.9
+* Updated surefire to 2.22.2 and disabled class loader
+* gitlab-ci and settings updated
 
 ### Version 0.0.4
 * added deserialization/serialization implementations for TIntFloatMap
