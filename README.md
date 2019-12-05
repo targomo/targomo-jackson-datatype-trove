@@ -14,7 +14,7 @@ To include add to maven:
 <dependency>
     <groupId>com.targomo</groupId>
     <artifactId>jackson-datatype-trove</artifactId>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
 </dependency>
 ```
 To include to your Jackson Object Mapper execute:
@@ -27,6 +27,10 @@ om.registerModule(new JodaModule())
 ```
 
 ## Change Log:
+
+### Version 0.0.7
+* Update jackson to 2.10.1
+* Update nexus repository
 
 ### Version 0.0.6
 * Updated jackson to 2.9.9

@@ -5,7 +5,7 @@
     <groupId>com.targomo</groupId>
     <artifactId>jackson-datatype-trove</artifactId>
     <name>${project.artifactId}</name>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
     <!--<packaging>jar</packaging>-->
     <description>Add-on datatype-support module for Jackson (http://jackson.codehaus.org)
         that handles Trove (http://trove.starlight-systems.com/) types
@@ -47,8 +47,8 @@
         <javac.src.version>1.8</javac.src.version>
         <javac.target.version>1.8</javac.target.version>
 
-        <dep.jackson>[2.9.9,)</dep.jackson>
-        <dep.jackson.joda>[2.9.9,)</dep.jackson.joda>
+        <dep.jackson>[2.10.1,)</dep.jackson>
+        <dep.jackson.joda>[2.10.1,)</dep.jackson.joda>
         <dep.trove>3.0.3</dep.trove>
 
         <junit.version>4.12</junit.version>
@@ -177,15 +177,15 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>targomo-nexus-snapshots</id>
+            <url>https://nexus.app.k8sdev.eu.targomo.com/repository/maven-snapshots/</url>
         </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>targomo-nexus-releases</id>
+            <url>https://nexus.app.k8sdev.eu.targomo.com/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
-
+    
     <profiles>
         <profile>
             <!-- Use "mvn deploy -DperformRelease=true ..." for deploying to maven central -->

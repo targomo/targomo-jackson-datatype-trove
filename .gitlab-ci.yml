@@ -1,10 +1,10 @@
 # Include Global Configurations
 include:
   - project: 'api-server/gitlab-ci-scripts'
-    ref: v1.0
+    ref: v1.5
     file: '.global-configuration.yml'
 
-image: code.route360.net:4567/docker/general-image/service/psql9.6:0.0.4
+image: $CI_REGISTRY/docker/general-image/service/psql9.6:0.0.10
 
 stages:
   - build
