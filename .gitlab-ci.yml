@@ -4,7 +4,7 @@ include:
     ref: v1.0
     file: '.global-configuration.yml'
 
-image: docker.eu.targomo.com/docker/general-image/service/psql9.6:0.0.10
+image: $CI_REGISTRY/docker/general-image/service/psql9.6:0.0.10
 
 stages:
   - build
@@ -14,7 +14,7 @@ stages:
 build:
   stage: build
   script:
-    - mvn clean compile
+    - mvn --settings .ci/settings.xml clean compile
   only:
     - /^feature.*$/
     - develop
@@ -22,7 +22,7 @@ build:
 sonarqube:
   stage: test
   script:
-    - mvn verify sonar:sonar
+    - mvn --settings .ci/settings.xml verify sonar:sonar
     - cat target/site/jacoco-ut/index.html
   only:
     - /^feature.*$/
