@@ -1,7 +1,7 @@
 # Include Global Configurations
 include:
   - project: 'api-server/gitlab-ci-scripts'
-    ref: v1.3
+    ref: v1.5
     file: '.global-configuration.yml'
 
 image: $CI_REGISTRY/docker/general-image/service/psql9.6:0.0.10
@@ -14,7 +14,7 @@ stages:
 build:
   stage: build
   script:
-    - mvn --settings settings.xml clean compile
+    - mvn clean compile
   only:
     - /^feature.*$/
     - develop
@@ -22,7 +22,7 @@ build:
 sonarqube:
   stage: test
   script:
-    - mvn --settings settings.xml verify sonar:sonar
+    - mvn verify sonar:sonar
     - cat target/site/jacoco-ut/index.html
   only:
     - /^feature.*$/
