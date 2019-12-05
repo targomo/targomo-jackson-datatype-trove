@@ -29,7 +29,7 @@ om.registerModule(new JodaModule())
 ## Change Log:
 
 ### Version 0.0.7
-* to fill with changes
+* Update jackson to 2.10.1
 
 ### Version 0.0.6
 * Updated jackson to 2.9.9
