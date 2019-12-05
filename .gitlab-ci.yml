@@ -14,7 +14,7 @@ stages:
 build:
   stage: build
   script:
-    - mvn --settings .ci/settings.xml clean compile
+    - mvn --settings settings.xml clean compile
   only:
     - /^feature.*$/
     - develop
@@ -22,7 +22,7 @@ build:
 sonarqube:
   stage: test
   script:
-    - mvn --settings .ci/settings.xml verify sonar:sonar
+    - mvn --settings settings.xml verify sonar:sonar
     - cat target/site/jacoco-ut/index.html
   only:
     - /^feature.*$/
