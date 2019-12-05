@@ -47,8 +47,8 @@
         <javac.src.version>1.8</javac.src.version>
         <javac.target.version>1.8</javac.target.version>
 
-        <dep.jackson>[2.9.9,)</dep.jackson>
-        <dep.jackson.joda>[2.9.9,)</dep.jackson.joda>
+        <dep.jackson>[2.10.1,)</dep.jackson>
+        <dep.jackson.joda>[2.10.1,)</dep.jackson.joda>
         <dep.trove>3.0.3</dep.trove>
 
         <junit.version>4.12</junit.version>
