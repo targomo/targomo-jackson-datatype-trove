@@ -51,7 +51,7 @@
         <dep.jackson.joda>[2.10.1,)</dep.jackson.joda>
         <dep.trove>3.0.3</dep.trove>
 
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <joda.time.version>2.1</joda.time.version>
         <assertj.version>3.6.2</assertj.version>
 
