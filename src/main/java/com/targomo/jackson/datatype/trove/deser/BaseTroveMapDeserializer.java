@@ -1,16 +1,18 @@
 package com.targomo.jackson.datatype.trove.deser;
 
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
+import com.fasterxml.jackson.databind.deser.ContextualKeyDeserializer;
+import com.fasterxml.jackson.databind.deser.std.ContainerDeserializerBase;
 import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 import com.fasterxml.jackson.databind.util.ClassUtil;
-import com.fasterxml.jackson.databind.deser.*;
-import com.fasterxml.jackson.databind.deser.std.ContainerDeserializerBase;
+
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Shared base class for serializers to use for both Object-keyed and Object-valued
@@ -97,12 +99,10 @@ public abstract class BaseTroveMapDeserializer<T>
         Set<String> ignored = ignorableProperties;
         AnnotationIntrospector intr = ctxt.getAnnotationIntrospector();
         if (intr != null && property != null) {
-            String[] moreToIgnore = intr.findPropertiesToIgnore(property.getMember());
-            if (moreToIgnore != null) {
-                ignored = (ignored == null) ? new HashSet<String>() : new HashSet<String>(ignored);
-                for (String str : moreToIgnore) {
-                    ignored.add(str);
-                }
+            JsonIgnoreProperties.Value moreToIgnore = intr.findPropertyIgnoralByName(ctxt.getConfig(), property.getMember());
+            if (moreToIgnore != null && !moreToIgnore.getIgnored().isEmpty()) {
+                ignored = (ignored == null) ? new HashSet<>() : new HashSet<>(ignored);
+                ignored.addAll(moreToIgnore.getIgnored());
             }
         }
         return withResolved(kd, vtd, vd, ignored);

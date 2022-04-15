@@ -28,6 +28,11 @@ om.registerModule(new JodaModule())
 
 ## Change Log:
 
+### Version 0.0.8
+* Update jackson to 2.13.2
+* Update joda time to 2.10.8
+* Update junit to 4.13.1
+
 ### Version 0.0.7
 * Update jackson to 2.10.1
 

@@ -5,7 +5,7 @@
     <groupId>com.targomo</groupId>
     <artifactId>jackson-datatype-trove</artifactId>
     <name>${project.artifactId}</name>
-    <version>0.0.7-SNAPSHOT</version>
+    <version>0.0.8-SNAPSHOT</version>
     <!--<packaging>jar</packaging>-->
     <description>Add-on datatype-support module for Jackson (http://jackson.codehaus.org)
         that handles Trove (http://trove.starlight-systems.com/) types
@@ -47,12 +47,11 @@
         <javac.src.version>1.8</javac.src.version>
         <javac.target.version>1.8</javac.target.version>
 
-        <dep.jackson>[2.10.1,)</dep.jackson>
-        <dep.jackson.joda>[2.10.1,)</dep.jackson.joda>
+        <dep.jackson>[2.13.2,)</dep.jackson>
         <dep.trove>3.0.3</dep.trove>
 
-        <junit.version>4.12</junit.version>
-        <joda.time.version>2.1</joda.time.version>
+        <junit.version>4.13.1</junit.version>
+        <joda.time.version>2.10.8</joda.time.version>
         <assertj.version>3.6.2</assertj.version>
 
         <sonar.language>java</sonar.language>
@@ -61,19 +60,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${dep.jackson}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>${dep.jackson}</version>
-        </dependency>
-        <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-joda</artifactId>
-            <version>${dep.jackson.joda}</version>
+            <version>${dep.jackson}</version>
         </dependency>
         <dependency>
             <groupId>net.sf.trove4j</groupId>
