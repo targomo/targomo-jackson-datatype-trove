@@ -163,19 +163,28 @@
         </plugins>
     </build>
 
-
     <distributionManagement>
         <snapshotRepository>
             <id>targomo-nexus-snapshots</id>
-            <url>https://repository.route360.net/repository/maven-snapshots/</url>
+            <url>${env.NEXUS_URL}/repository/maven-snapshots/</url>
         </snapshotRepository>
         <repository>
             <id>targomo-nexus-releases</id>
-            <url>https://repository.route360.net/repository/maven-releases/</url>
+            <url>${env.NEXUS_URL}/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
     
     <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.host.url>${env.SONARQUBE_URL}</sonar.host.url>
+            </properties>
+        </profile>
+
         <profile>
             <!-- Use "mvn deploy -DperformRelease=true ..." for deploying to maven central -->
             <id>release</id>

@@ -4,7 +4,7 @@ include:
     ref: v1.5
     file: '.global-configuration.yml'
 
-image: $CI_REGISTRY/docker/debian/maven:3.6.1_jdk8-jre_ci
+image: $CI_REGISTRY/oci/base/maven:3.6.3_jdk8-jre-slim_bullseye-ci
 
 stages:
   - build
