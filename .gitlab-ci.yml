@@ -4,7 +4,7 @@ include:
     ref: v1.5
     file: '.global-configuration.yml'
 
-image: $CI_REGISTRY/docker/general-image/service/psql9.6:0.0.10
+image: $CI_REGISTRY/oci/base/maven:3.6.3_jdk8-jre-slim_bullseye-ci
 
 stages:
   - build
