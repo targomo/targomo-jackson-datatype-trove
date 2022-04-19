@@ -120,7 +120,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.1</version>
+                <version>0.8.4</version>
                 <executions>
                     <!--
                     Prepares the property pointing to the JaCoCo runtime agent which
@@ -175,16 +175,6 @@
     </distributionManagement>
     
     <profiles>
-        <profile>
-            <id>sonar</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <sonar.host.url>${env.SONARQUBE_URL}</sonar.host.url>
-            </properties>
-        </profile>
-
         <profile>
             <!-- Use "mvn deploy -DperformRelease=true ..." for deploying to maven central -->
             <id>release</id>

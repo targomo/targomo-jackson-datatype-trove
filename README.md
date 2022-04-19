@@ -32,6 +32,7 @@ om.registerModule(new JodaModule())
 * Update jackson to 2.13.2
 * Update joda time to 2.10.8
 * Update junit to 4.13.1
+* Update jacoco to 0.8.4
 
 ### Version 0.0.7
 * Update jackson to 2.10.1
