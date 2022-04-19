@@ -1,10 +1,13 @@
+image: $CI_REGISTRY/docker/debian/maven:3.6.1_jdk8-jre_ci
+
 # Include Global Configurations
 include:
   - project: 'api-server/gitlab-ci-scripts'
-    ref: v1.5
+    ref: v1.7
     file: '.global-configuration.yml'
 
-image: $CI_REGISTRY/oci/base/maven:3.6.3_jdk8-jre-slim_bullseye-ci
+variables:
+  BASE_URL:   ""
 
 stages:
   - build
@@ -60,3 +63,13 @@ deploy_nexus:
     - /^release.*$/
     - develop
 
+# ----------------------------------------------------------------------------------------------------
+
+.auto_devops: &auto_devops |
+  # Auto DevOps variables and functions
+  [[ "$TRACE" ]] && set -x
+
+
+before_script:
+  - *auto_devops
+  - export BASE_URL=$(echo $CI_REPOSITORY_URL | sed "s,\/*$CI_PROJECT_PATH.*,,")
