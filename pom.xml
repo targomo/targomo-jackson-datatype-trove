@@ -5,7 +5,7 @@
     <groupId>com.targomo</groupId>
     <artifactId>jackson-datatype-trove</artifactId>
     <name>${project.artifactId}</name>
-    <version>0.0.7-SNAPSHOT</version>
+    <version>0.0.8-SNAPSHOT</version>
     <!--<packaging>jar</packaging>-->
     <description>Add-on datatype-support module for Jackson (http://jackson.codehaus.org)
         that handles Trove (http://trove.starlight-systems.com/) types
@@ -44,15 +44,16 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <javac.src.version>1.8</javac.src.version>
         <javac.target.version>1.8</javac.target.version>
 
-        <dep.jackson>[2.10.1,)</dep.jackson>
-        <dep.jackson.joda>[2.10.1,)</dep.jackson.joda>
+        <dep.jackson>[2.12.6,)</dep.jackson>
+        <dep.jackson.joda>[2.12.6,)</dep.jackson.joda>
         <dep.trove>3.0.3</dep.trove>
 
-        <junit.version>4.12</junit.version>
-        <joda.time.version>2.1</joda.time.version>
+        <junit.version>4.13.1</junit.version>
+        <joda.time.version>2.10.8</joda.time.version>
         <assertj.version>3.6.2</assertj.version>
 
         <sonar.language>java</sonar.language>
@@ -80,7 +81,6 @@
             <artifactId>trove4j</artifactId>
             <version>${dep.trove}</version>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -131,7 +131,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.1</version>
+                <version>0.8.4</version>
                 <executions>
                     <!--
                     Prepares the property pointing to the JaCoCo runtime agent which
@@ -174,15 +174,14 @@
         </plugins>
     </build>
 
-
     <distributionManagement>
         <snapshotRepository>
             <id>targomo-nexus-snapshots</id>
-            <url>https://repository.route360.net/repository/maven-snapshots/</url>
+            <url>${env.NEXUS_URL}/repository/maven-snapshots/</url>
         </snapshotRepository>
         <repository>
             <id>targomo-nexus-releases</id>
-            <url>https://repository.route360.net/repository/maven-releases/</url>
+            <url>${env.NEXUS_URL}/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
     

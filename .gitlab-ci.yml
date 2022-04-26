@@ -1,10 +1,13 @@
+image: $CI_REGISTRY/docker/debian/maven:3.6.1_jdk8-jre_ci
+
 # Include Global Configurations
 include:
   - project: 'api-server/gitlab-ci-scripts'
-    ref: v1.5
+    ref: v1.7
     file: '.global-configuration.yml'
 
-image: $CI_REGISTRY/docker/general-image/service/psql9.6:0.0.10
+variables:
+  BASE_URL:   ""
 
 stages:
   - build
@@ -14,7 +17,10 @@ stages:
 build:
   stage: build
   script:
-    - mvn clean compile
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - git clone "$BASE_URL/api-server/gitlab-ci-scripts.git" targomo-config
+    - cp targomo-config/mvn/settings.xml settings.xml
+    - mvn --settings settings.xml clean compile
   only:
     - /^feature.*$/
     - develop
@@ -22,7 +28,13 @@ build:
 sonarqube:
   stage: test
   script:
-    - mvn verify sonar:sonar
+    - git clone "$BASE_URL/api-server/gitlab-ci-scripts.git" targomo-config
+    - cp targomo-config/mvn/settings.xml settings.xml
+    - mvn --settings settings.xml verify sonar:sonar
+      -Dsonar.host.url=$SONARQUBE_URL
+      -Dsonar.login=$SONARQUBE_TOKEN
+      -Dsonar.branch.name=$CI_COMMIT_REF_NAME
+      -Dsonar.branch.target=develop
     - cat target/site/jacoco-ut/index.html
   only:
     - /^feature.*$/
@@ -31,7 +43,16 @@ sonarqube:
 deploy_maven:
   stage: deploy
   script:
-    - mvn -DperformRelease=true deploy
+    # Import keys from pipeline runner secrets
+    - gpg --import /etc/targomo/public.gpg
+    - gpg --import --no-tty --batch --yes /etc/targomo/private.gpg
+    - gpg --list-keys
+    - echo -e "use-agent\npinentry-mode loopback" >> ~/.gnupg/gpg.conf
+    - echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
+    - cp /etc/targomo/settings.xml /usr/share/maven/conf/settings.xml
+    - git clone "$BASE_URL/api-server/gitlab-ci-scripts.git" targomo-config
+    - cp targomo-config/mvn/settings.xml settings.xml
+    - mvn -DperformRelease=true --settings settings.xml deploy
   artifacts:
     name: "${CI_JOB_NAME}_${CI_COMMIT_REF_NAME}"
     paths:
@@ -39,11 +60,15 @@ deploy_maven:
   when: manual
   only:
     - master
+  tags:
+    - k8sdev
 
 deploy_nexus:
   stage: deploy
   script:
-    - mvn -Dmaven.test.skip=true deploy
+    - git clone "$BASE_URL/api-server/gitlab-ci-scripts.git" targomo-config
+    - cp targomo-config/mvn/settings.xml settings.xml
+    - mvn -Dmaven.test.skip=true --settings settings.xml deploy
   artifacts:
     name: "${CI_JOB_NAME}_${CI_COMMIT_REF_NAME}"
     paths:
@@ -54,3 +79,13 @@ deploy_nexus:
     - /^release.*$/
     - develop
 
+# ----------------------------------------------------------------------------------------------------
+
+.auto_devops: &auto_devops |
+  # Auto DevOps variables and functions
+  [[ "$TRACE" ]] && set -x
+
+
+before_script:
+  - *auto_devops
+  - export BASE_URL=$(echo $CI_REPOSITORY_URL | sed "s,\/*$CI_PROJECT_PATH.*,,")
