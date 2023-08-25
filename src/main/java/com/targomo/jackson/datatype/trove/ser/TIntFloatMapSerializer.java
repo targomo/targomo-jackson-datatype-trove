@@ -81,12 +81,11 @@ public class TIntFloatMapSerializer extends BaseTroveMapSerializer<TIntFloatMap>
      * and need to statically find the serializer.
      */
     protected boolean hasContentTypeAnnotation(SerializerProvider provider,
-                                               BeanProperty property)
-    {
+                                               BeanProperty property) throws JsonMappingException {
         if (property != null) {
             AnnotationIntrospector intr = provider.getAnnotationIntrospector();
             if (intr != null) {
-                if (intr.findSerializationContentType(property.getMember(), property.getType()) != null) {
+                if (intr.refineSerializationType(provider.getConfig(), property.getMember(), property.getType()) != null) {
                     return true;
                 }
             }
