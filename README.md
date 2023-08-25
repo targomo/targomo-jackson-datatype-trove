@@ -4,6 +4,10 @@ This module facilitates serialization and deserialization of certain Trove objec
 * TIntFloatMap
 * TIntObjectMap
 * TObjectIntMap
+* TLongIntMap
+* TLongFloatMap
+* TLongObjectMap
+* TObjectLongMap
 
 This is a forked project from https://bitbucket.org/marshallpierce/jackson-datatype-trove.
 It has been slightly amended to work with our jackson version and we added a few serializers/deserializers. 
@@ -14,7 +18,7 @@ To include add to maven:
 <dependency>
     <groupId>com.targomo</groupId>
     <artifactId>jackson-datatype-trove</artifactId>
-    <version>0.0.7</version>
+    <version>0.0.9</version>
 </dependency>
 ```
 To include to your Jackson Object Mapper execute:
@@ -27,6 +31,9 @@ om.registerModule(new JodaModule())
 ```
 
 ## Change Log:
+
+### Version 0.0.9
+* added deserialization/serialization implementations for Long Maps
 
 ### Version 0.0.8
 * Update jackson to 2.12.6
