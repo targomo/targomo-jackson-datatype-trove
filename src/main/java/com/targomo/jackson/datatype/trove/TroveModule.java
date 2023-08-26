@@ -8,12 +8,14 @@ public final class TroveModule extends SimpleModule {
     private static final long serialVersionUID = 1L;
 
     private final int noEntryValueInt;
+    private final long noEntryValueLong;
     private final float noEntryValueFloat;
 
-    public TroveModule(int noEntryValueInt, float noEntryValueFloat) {
+    public TroveModule(int noEntryValueInt, long noEntryValueLong, float noEntryValueFloat) {
         super("TroveModule", ModuleVersion.INSTANCE.version());
         this.noEntryValueInt = noEntryValueInt;
         this.noEntryValueFloat = noEntryValueFloat;
+        this.noEntryValueLong = noEntryValueLong;
     }
 
     @Override
@@ -23,6 +25,6 @@ public final class TroveModule extends SimpleModule {
         context.addTypeModifier(new TroveTypeModifier());
 
         context.addSerializers(new TroveSerializers());
-        context.addDeserializers(new TroveDeserializers(this.noEntryValueInt,this.noEntryValueFloat));
+        context.addDeserializers(new TroveDeserializers(this.noEntryValueInt,this.noEntryValueLong,this.noEntryValueFloat));
     }
 }

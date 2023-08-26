@@ -16,12 +16,12 @@ public class TObjectLongMapDeserializer
     extends BaseTroveObjectKeyMapDeserializer<TObjectLongMap<Object>>
 {
     private static final long serialVersionUID = 1L;
-    private final int noEntryValue;
+    private final long noEntryValue;
 
     public TObjectLongMapDeserializer(JavaType type, BeanProperty property,
                                       KeyDeserializer keyDeserializer, TypeDeserializer valueTypeDeserializer,
                                       JsonDeserializer<?> valueDeserializer,
-                                      Set<String> toIgnore, int noEntryValue)
+                                      Set<String> toIgnore, long noEntryValue)
     {
         super(type, property, keyDeserializer, valueTypeDeserializer, valueDeserializer, toIgnore);
         this.noEntryValue = noEntryValue;

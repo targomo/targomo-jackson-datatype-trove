@@ -80,13 +80,12 @@ public class TLongIntMapSerializer extends BaseTroveMapSerializer<TLongIntMap> i
      * a property annotation that overrides element type; if so, we can
      * and need to statically find the serializer.
      */
-    protected boolean hasContentTypeAnnotation(SerializationConfig config,
-                                               SerializerProvider provider,
+    protected boolean hasContentTypeAnnotation(SerializerProvider provider,
                                                BeanProperty property) throws JsonMappingException {
         if (property != null) {
             AnnotationIntrospector intr = provider.getAnnotationIntrospector();
             if (intr != null) {
-                if (intr.refineSerializationType(config, property.getMember(), property.getType()) != null) {
+                if (intr.findSerializationContentType(property.getMember(), property.getType()) != null) {
                     return true;
                 }
             }

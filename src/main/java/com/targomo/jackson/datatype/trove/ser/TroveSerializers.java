@@ -7,10 +7,7 @@ import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import com.fasterxml.jackson.databind.type.CollectionLikeType;
 import com.fasterxml.jackson.databind.type.MapLikeType;
-import gnu.trove.map.TIntFloatMap;
-import gnu.trove.map.TIntIntMap;
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.TObjectIntMap;
+import gnu.trove.map.*;
 
 public final class TroveSerializers extends Serializers.Base {
     
@@ -22,26 +19,26 @@ public final class TroveSerializers extends Serializers.Base {
     {
         // LONGS
         // Object-key types:
-        if (TObjectIntMap.class.isAssignableFrom(type.getRawClass())) {
-            return new TObjectIntMapSerializer(type, null,
+        if (TObjectLongMap.class.isAssignableFrom(type.getRawClass())) {
+            return new TObjectLongMapSerializer(type, null,
                     keySerializer, elementTypeSerializer, elementValueSerializer);
         }
 
         // Object-value types:
-        if (TIntObjectMap.class.isAssignableFrom(type.getRawClass())) {
-            return new TIntObjectMapSerializer(type, null,
+        if (TLongObjectMap.class.isAssignableFrom(type.getRawClass())) {
+            return new TLongObjectMapSerializer(type, null,
                     keySerializer, elementTypeSerializer, elementValueSerializer);
         }
 
         // int-int types:
-        if (TIntIntMap.class.isAssignableFrom(type.getRawClass())) {
-            return new TIntIntMapSerializer(type, null,
+        if (TLongIntMap.class.isAssignableFrom(type.getRawClass())) {
+            return new TLongIntMapSerializer(type, null,
                     keySerializer, elementTypeSerializer, elementValueSerializer);
         }
 
         // int-float types:
-        if (TIntFloatMap.class.isAssignableFrom(type.getRawClass())) {
-            return new TIntFloatMapSerializer(type, null,
+        if (TLongFloatMap.class.isAssignableFrom(type.getRawClass())) {
+            return new TLongFloatMapSerializer(type, null,
                     keySerializer, elementTypeSerializer, elementValueSerializer);
         }
 

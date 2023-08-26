@@ -14,11 +14,13 @@ import java.util.Set;
 public class TroveDeserializers extends Deserializers.Base{
 
     private final int noEntryValueInt;
+    private final long noEntryValueLong;
     private final float noEntryValueFloat;
 
-    public TroveDeserializers(int noEntryValueInt, float noEntryValueFloat){
+    public TroveDeserializers(int noEntryValueInt, long noEntryValueLong, float noEntryValueFloat){
         this.noEntryValueInt = noEntryValueInt;
         this.noEntryValueFloat = noEntryValueFloat;
+        this.noEntryValueLong = noEntryValueLong;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class TroveDeserializers extends Deserializers.Base{
         if (TObjectLongMap.class.isAssignableFrom(type.getRawClass())) {
             return new TObjectLongMapDeserializer(type, null, keyDeserializer,
                     elementTypeDeserializer, elementDeserializer,
-                    _findIgnorable(config, beanDesc), this.noEntryValueInt);
+                    _findIgnorable(config, beanDesc), this.noEntryValueLong);
         }
         // Object-value types:
         if (TLongObjectMap.class.isAssignableFrom(type.getRawClass())) {

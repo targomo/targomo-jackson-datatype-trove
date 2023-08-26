@@ -35,7 +35,7 @@ public class TIntIntMapDeserializerTest extends BaseTroveDeserializerTest
         map.put(17, 3);
 
         ObjectMapper om = new ObjectMapper();
-        om.registerModule(new TroveModule(NO_ENTRY_VALUE_INT_TESTS, NO_ENTRY_VALUE_FLOAT_TESTS))
+        om.registerModule(new TroveModule(NO_ENTRY_VALUE_INT_TESTS, NO_ENTRY_VALUE_LONG_TESTS, NO_ENTRY_VALUE_FLOAT_TESTS))
                 .registerModule(new JodaModule());
 //        System.out.println( om.writerWithDefaultPrettyPrinter().writeValueAsString(map) );
 
