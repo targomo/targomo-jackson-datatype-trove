@@ -1,15 +1,13 @@
 package com.targomo.jackson.datatype.trove.ser;
 
-import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.BeanDescription;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializationConfig;
 import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import com.fasterxml.jackson.databind.type.CollectionLikeType;
 import com.fasterxml.jackson.databind.type.MapLikeType;
-
-import gnu.trove.map.TIntFloatMap;
-import gnu.trove.map.TIntIntMap;
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.TObjectIntMap;
+import gnu.trove.map.*;
 
 public final class TroveSerializers extends Serializers.Base {
     
@@ -19,6 +17,32 @@ public final class TroveSerializers extends Serializers.Base {
                                                    TypeSerializer elementTypeSerializer,
                                                    JsonSerializer<Object> elementValueSerializer)
     {
+        // LONGS
+        // Object-key types:
+        if (TObjectLongMap.class.isAssignableFrom(type.getRawClass())) {
+            return new TObjectLongMapSerializer(type, null,
+                    keySerializer, elementTypeSerializer, elementValueSerializer);
+        }
+
+        // Object-value types:
+        if (TLongObjectMap.class.isAssignableFrom(type.getRawClass())) {
+            return new TLongObjectMapSerializer(type, null,
+                    keySerializer, elementTypeSerializer, elementValueSerializer);
+        }
+
+        // int-int types:
+        if (TLongIntMap.class.isAssignableFrom(type.getRawClass())) {
+            return new TLongIntMapSerializer(type, null,
+                    keySerializer, elementTypeSerializer, elementValueSerializer);
+        }
+
+        // int-float types:
+        if (TLongFloatMap.class.isAssignableFrom(type.getRawClass())) {
+            return new TLongFloatMapSerializer(type, null,
+                    keySerializer, elementTypeSerializer, elementValueSerializer);
+        }
+
+        // INTEGERS
         // Object-key types:
         if (TObjectIntMap.class.isAssignableFrom(type.getRawClass())) {
             return new TObjectIntMapSerializer(type, null,

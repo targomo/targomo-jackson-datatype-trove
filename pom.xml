@@ -5,7 +5,7 @@
     <groupId>com.targomo</groupId>
     <artifactId>jackson-datatype-trove</artifactId>
     <name>${project.artifactId}</name>
-    <version>0.0.8</version>
+    <version>0.0.9</version>
     <!--<packaging>jar</packaging>-->
     <description>Add-on datatype-support module for Jackson (http://jackson.codehaus.org)
         that handles Trove (http://trove.starlight-systems.com/) types
@@ -48,8 +48,8 @@
         <javac.src.version>1.8</javac.src.version>
         <javac.target.version>1.8</javac.target.version>
 
-        <dep.jackson>[2.12.6,)</dep.jackson>
-        <dep.jackson.joda>[2.12.6,)</dep.jackson.joda>
+        <dep.jackson>2.12.6</dep.jackson>
+        <dep.jackson.joda>2.12.6</dep.jackson.joda>
         <dep.trove>3.0.3</dep.trove>
 
         <junit.version>4.13.1</junit.version>

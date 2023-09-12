@@ -6,16 +6,16 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
 import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
-import gnu.trove.map.TIntFloatMap;
+import gnu.trove.map.TLongFloatMap;
 
 import java.io.IOException;
 
-public class TIntFloatMapSerializer extends BaseTroveMapSerializer<TIntFloatMap> implements ContextualSerializer
+public class TLongFloatMapSerializer extends BaseTroveMapSerializer<TLongFloatMap> implements ContextualSerializer
 {
-    TIntFloatMapSerializer(JavaType type, BeanProperty property,
-                           JsonSerializer<Object> keySerializer,
-                           TypeSerializer valueTypeSerializer,
-                           JsonSerializer<Object> valueSerializer) {
+    TLongFloatMapSerializer(JavaType type, BeanProperty property,
+                            JsonSerializer<Object> keySerializer,
+                            TypeSerializer valueTypeSerializer,
+                            JsonSerializer<Object> valueSerializer) {
         super(type, property, keySerializer, valueTypeSerializer, valueSerializer);
     }
 
@@ -121,15 +121,15 @@ public class TIntFloatMapSerializer extends BaseTroveMapSerializer<TIntFloatMap>
         return false;
     }
 
-    protected JsonSerializer<TIntFloatMap> withResolved(BeanProperty prop,
+    protected JsonSerializer<TLongFloatMap> withResolved(BeanProperty prop,
                                                       JsonSerializer<Object> newKeySerializer,
                                                       JsonSerializer<Object> newValueSerializer) {
-        return new TIntFloatMapSerializer(mapType, prop,
+        return new TLongFloatMapSerializer(mapType, prop,
                 newKeySerializer, valueTypeSerializer, newValueSerializer);
     }
     
     @Override
-    void serializeEntries(TIntFloatMap map, final JsonGenerator jgen, final SerializerProvider provider)
+    void serializeEntries(TLongFloatMap map, final JsonGenerator jgen, final SerializerProvider provider)
         throws IOExceptionWrapper
     {
         // somewhat easy, as both key and value serializers are statically known
@@ -155,7 +155,7 @@ public class TIntFloatMapSerializer extends BaseTroveMapSerializer<TIntFloatMap>
     }
 
     @Override
-    public boolean isEmpty(TIntFloatMap value) {
+    public boolean isEmpty(TLongFloatMap value) {
         return value.isEmpty();
     }
 }

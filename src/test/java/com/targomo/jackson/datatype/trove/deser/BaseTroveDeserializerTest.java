@@ -14,11 +14,12 @@ public abstract class BaseTroveDeserializerTest {
 
     final int NO_ENTRY_VALUE_INT_TESTS = Integer.MAX_VALUE;
     final float NO_ENTRY_VALUE_FLOAT_TESTS = Float.MAX_VALUE;
+    final long NO_ENTRY_VALUE_LONG_TESTS = Long.MAX_VALUE;
 
     @Before
     public void setUp() {
         reader = new ObjectMapper()
-                .registerModule(new TroveModule(NO_ENTRY_VALUE_INT_TESTS,NO_ENTRY_VALUE_FLOAT_TESTS))
+                .registerModule(new TroveModule(NO_ENTRY_VALUE_INT_TESTS, NO_ENTRY_VALUE_LONG_TESTS, NO_ENTRY_VALUE_FLOAT_TESTS))
                 .registerModule(new JodaModule())
                 .reader();
     }
